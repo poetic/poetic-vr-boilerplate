@@ -1,6 +1,6 @@
 Package.describe({
   name: 'poeticsystems:vrboiler-plate',
-  version: '0.0.1',
+  version: '0.0.2',
   // Brief, one-line summary of the package.
   summary: '',
   // URL to the Git repository containing the source code for this package.
@@ -18,7 +18,7 @@ Package.onUse(function(api) {
                'webvr-boilerplate/js/deps/VREffect.js',
                'webvr-boilerplate/js/deps/webvr-polyfill.js',
                'webvr-boilerplate/build/webvr-manager.js',
-               'initiate.js']);
+               'initiate.js'], 'client', {bare: true});
   api.export("THREE");
 });
 

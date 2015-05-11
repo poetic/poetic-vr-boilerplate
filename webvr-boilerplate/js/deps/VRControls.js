@@ -1,122 +1,119 @@
-if(Meteor.isClient){
-
 /**
  * @author dmarcos / https://github.com/dmarcos
  * @author mrdoob / http://mrdoob.com
  */
 
-THREE.VRControls = function ( object, onError ) {
+Meteor.THREE.VRControls = function ( object, onError ) {
 
-	var scope = this;
+  var scope = this;
 
-	var vrInputs = [];
+  var vrInputs = [];
 
-	function filterInvalidDevices( devices ) {
+  function filterInvalidDevices( devices ) {
 
-		// Exclude Cardboard position sensor if Oculus exists.
+    // Exclude Cardboard position sensor if Oculus exists.
 
-		var oculusDevices = devices.filter( function ( device ) {
+    var oculusDevices = devices.filter( function ( device ) {
 
-			return device.deviceName.toLowerCase().indexOf('oculus') !== -1;
+      return device.deviceName.toLowerCase().indexOf('oculus') !== -1;
 
-		} );
+    } );
 
-		if ( oculusDevices.length >= 1 ) {
+    if ( oculusDevices.length >= 1 ) {
 
-			return devices.filter( function ( device ) {
+      return devices.filter( function ( device ) {
 
-				return device.deviceName.toLowerCase().indexOf('cardboard') === -1;
+        return device.deviceName.toLowerCase().indexOf('cardboard') === -1;
 
-			} );
+      } );
 
-		} else {
+    } else {
 
-			return devices;
+      return devices;
 
-		}
+    }
 
-	}
+  }
 
-	function gotVRDevices( devices ) {
+  function gotVRDevices( devices ) {
 
-		devices = filterInvalidDevices( devices );
+    devices = filterInvalidDevices( devices );
 
-		for ( var i = 0; i < devices.length; i ++ ) {
+    for ( var i = 0; i < devices.length; i ++ ) {
 
-			if ( devices[ i ] instanceof PositionSensorVRDevice ) {
+      if ( devices[ i ] instanceof PositionSensorVRDevice ) {
 
-				vrInputs.push( devices[ i ] );
+        vrInputs.push( devices[ i ] );
 
-			}
+      }
 
-		}
+    }
 
-		if ( onError ) onError( 'HMD not available' );
+    if ( onError ) onError( 'HMD not available' );
 
-	}
+  }
 
-	if ( navigator.getVRDevices ) {
+  if ( navigator.getVRDevices ) {
 
-		navigator.getVRDevices().then( gotVRDevices );
+    navigator.getVRDevices().then( gotVRDevices );
 
-	}
+  }
 
-	// the Rift SDK returns the position in meters
-	// this scale factor allows the user to define how meters
-	// are converted to scene units.
+  // the Rift SDK returns the position in meters
+  // this scale factor allows the user to define how meters
+  // are converted to scene units.
 
-	this.scale = 1;
+  this.scale = 1;
 
-	this.update = function () {
+  this.update = function () {
 
-		for ( var i = 0; i < vrInputs.length; i ++ ) {
+    for ( var i = 0; i < vrInputs.length; i ++ ) {
 
-			var vrInput = vrInputs[ i ];
+      var vrInput = vrInputs[ i ];
 
-			var state = vrInput.getState();
+      var state = vrInput.getState();
 
-			if ( state.orientation !== null ) {
+      if ( state.orientation !== null ) {
 
-				object.quaternion.copy( state.orientation );
+        object.quaternion.copy( state.orientation );
 
-			}
+      }
 
-			if ( state.position !== null ) {
+      if ( state.position !== null ) {
 
-				object.position.copy( state.position ).multiplyScalar( scope.scale );
+        object.position.copy( state.position ).multiplyScalar( scope.scale );
 
-			}
+      }
 
-		}
+    }
 
-	};
+  };
 
-	this.resetSensor = function () {
+  this.resetSensor = function () {
 
-		for ( var i = 0; i < vrInputs.length; i ++ ) {
+    for ( var i = 0; i < vrInputs.length; i ++ ) {
 
-			var vrInput = vrInputs[ i ];
+      var vrInput = vrInputs[ i ];
 
-			if ( vrInput.resetSensor !== undefined ) {
+      if ( vrInput.resetSensor !== undefined ) {
 
-				vrInput.resetSensor();
+        vrInput.resetSensor();
 
-			} else if ( vrInput.zeroSensor !== undefined ) {
+      } else if ( vrInput.zeroSensor !== undefined ) {
 
-				vrInput.zeroSensor();
+        vrInput.zeroSensor();
 
-			}
+      }
 
-		}
+    }
 
-	};
+  };
 
-	this.zeroSensor = function () {
+  this.zeroSensor = function () {
 
-		THREE.warn( 'THREE.VRControls: .zeroSensor() is now .resetSensor().' );
-		this.resetSensor();
+    Meteor.THREE.warn( 'Meteor.THREE.VRControls: .zeroSensor() is now .resetSensor().' );
+    this.resetSensor();
 
-	};
+  };
 
-};
 };
