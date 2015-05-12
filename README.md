@@ -1,13 +1,15 @@
+# To install
 A wrapper around the repo https://github.com/borismus/webvr-boilerplate for meteor.
 
 To use type `meteor add poeticsystems:vrboiler-plate`
   * Run `meteor update` before adding package to avoid dependency issues.
 
+# Example usage
 To see it in action add this to your javascript as an example usage
 
 ```
   window.onload = function(){
-  
+
     //Setup three.js WebGL renderer
     var renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);
