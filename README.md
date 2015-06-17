@@ -1,7 +1,9 @@
+namesspace has changed from poeticsystems to poetic
+
 # To install
 A wrapper around the repo https://github.com/borismus/webvr-boilerplate for meteor.
 
-To use type `meteor add poeticsystems:vrboiler-plate`
+To use type `meteor add poetic:vrboiler-plate`
   * Run `meteor update` before adding package to avoid dependency issues.
 
 # Example usage
