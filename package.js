@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'poeticsystems:vrboiler-plate',
+  name: 'poetic:vrboiler-plate',
   version: '0.0.4',
   // Brief, one-line summary of the package.
   summary: 'A small wrapper to a web virtual reality boiler plate page',
@@ -22,5 +22,5 @@ Package.onUse(function(api) {
 
 Package.onTest(function(api) {
   api.use('tinytest');
-  api.use('poeticsystems:vrboiler-plate');
+  api.use('poetic:vrboiler-plate');
 });
