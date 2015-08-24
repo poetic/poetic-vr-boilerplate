@@ -1,6 +1,6 @@
 Package.describe({
   name: 'poetic:vrboiler-plate',
-  version: '0.0.4',
+  version: '0.0.5',
   // Brief, one-line summary of the package.
   summary: 'A small wrapper to a web virtual reality boiler plate page',
   // URL to the Git repository containing the source code for this package.
@@ -13,6 +13,10 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.2');
   api.addFiles(['webvr-boilerplate/js/deps/three.js',
+               'webvr-boilerplate/js/deps/ddsloader.js',
+               'webvr-boilerplate/js/deps/mtlloader.js',
+               'webvr-boilerplate/js/deps/objloader.js',
+               'webvr-boilerplate/js/deps/objmtlloader.js',
                'webvr-boilerplate/js/deps/VRControls.js',
                'webvr-boilerplate/js/deps/VREffect.js',
                'webvr-boilerplate/js/deps/webvr-polyfill.js',
