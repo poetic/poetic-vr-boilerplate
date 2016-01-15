@@ -108,6 +108,7 @@ function getObjectByType(type, opts){
     case 'move-y': payload.opts = { stop: opts.stop, prop: 'mesh.position.y' }; return payload;
     case 'move-z': payload.opts = { stop: opts.stop, prop: 'mesh.position.z' }; return payload;
     case 'gradient-shift': payload.opts = { stop: opts.stop, type: 'vector', prop: 'mesh.material.color' }; return payload;
+    case 'specular-shift': payload.opts = { stop: opts.stop, type: 'vector', prop: 'mesh.material.specular' }; return payload;
     default: warn('Internal Code Problem! Default animation.type was NOT set to \'fade-out\'.');
   }
 
