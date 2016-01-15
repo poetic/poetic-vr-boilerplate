@@ -1,6 +1,6 @@
 Package.describe({
   name: 'poetic:vrboiler-plate',
-  version: '0.0.7',
+  version: '0.0.8',
   // Brief, one-line summary of the package.
   summary: 'A small wrapper to a web virtual reality boiler plate page',
   // URL to the Git repository containing the source code for this package.
@@ -20,8 +20,13 @@ Package.onUse(function(api) {
                'webvr-boilerplate/js/deps/VRControls.js',
                'webvr-boilerplate/js/deps/VREffect.js',
                'webvr-boilerplate/js/deps/webvr-polyfill.js',
-               'webvr-boilerplate/build/webvr-manager.js',],
+               'webvr-boilerplate/build/webvr-manager.js',
+               'scene-manager.js',
+               'utils.js',
+               'utils-animate.js',],
                'client', {bare: true});
+
+  api.export(['SceneManager', 'Utils']);
 });
 
 Package.onTest(function(api) {
