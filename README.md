@@ -7,79 +7,49 @@ To use type `meteor add poetic:vrboiler-plate`
   * Run `meteor update` before adding package to avoid dependency issues.
 
 # Example usage
-To see it in action add this to your javascript as an example usage
 
+Sample HTML File:
 ```
-  window.onload = function(){
+<head>
+  <title>vrupdate</title>
+</head>
 
-    //Setup three.js WebGL renderer
-    var renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
+<body>
+  {{> scene}}
+</body>
 
-    // Append the canvas element created by the renderer to document body element.
-    document.body.appendChild(renderer.domElement);
+<template name="scene">
+</template>
+```
 
-    // Create a three.js scene.
-    var scene = new THREE.Scene();
+Initiate the Javascript
+```
+Template.scene.onRendered(function (){
+  SceneManager.init();
+  addCube(SceneManager.scene);
+  Utils.animate( [SceneManager, Utils] );
+});
 
-    // Create a three.js camera.
-    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.3, 10000);
+function addCube(scene){
+  var mesh = new THREE.Mesh( new THREE.BoxGeometry( 10, 10, 10 ),
+             new THREE.MeshPhongMaterial({ color: 0x009900, specular: 0x00FF00, shininess: 50, shading: 0.5}) );
+  scene.add(mesh);
+  mesh.name = "box";
+  mesh.position.z = -50;
+  Utils.registerFunction(rotate, mesh);
+}
 
-    // Apply VR headset positional data to camera.
-    var controls = new THREE.VRControls(camera);
+function rotate(mesh){
+  mesh.rotation.x += .01;
+  mesh.rotation.y += .01;
+}
+```
 
-    // Apply VR stereo rendering to renderer.
-    var effect = new THREE.VREffect(renderer);
-    effect.setSize(window.innerWidth, window.innerHeight);
-
-    // Create a VR manager helper to enter and exit VR mode.
-    var manager = new WebVRManager(renderer, effect, {hideButton: false});
-
-    // Create 3D objects.
-    var geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-    var material = new THREE.MeshNormalMaterial();
-    var cube = new THREE.Mesh(geometry, material);
-
-    // Position cube mesh
-    cube.position.z = -1;
-
-    // Add cube mesh to your three.js scene
-    scene.add(cube);
-
-    // Request animation frame loop function
-    function animate() {
-      // Apply rotation to cube mesh
-      cube.rotation.y += 0.01;
-
-      // Update VR headset position and apply to camera.
-      controls.update();
-
-      // Render the scene through the manager.
-      manager.render(scene, camera);
-
-      requestAnimationFrame(animate);
-    }
-
-    // Kick off animation loop
-    animate();
-
-    // Reset the position sensor when 'z' pressed.
-    function onKey(event) {
-      if (event.keyCode == 90) { // z
-        controls.resetSensor();
-      }
-    };
-
-    window.addEventListener('keydown', onKey, true);
-
-    // Handle window resizes
-    function onWindowResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-
-      effect.setSize( window.innerWidth, window.innerHeight );
-    }
-
-    window.addEventListener('resize', onWindowResize, false);
+Add events:
+```
+Utils.events({
+  'lookAt .box': function(mesh) {
+    console.log('stop looking at me');
   }
-  ```
+});
+```
