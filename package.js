@@ -21,6 +21,7 @@ Package.onUse(function(api) {
                'webvr-boilerplate/js/deps/VREffect.js',
                'webvr-boilerplate/js/deps/webvr-polyfill.js',
                'webvr-boilerplate/build/webvr-manager.js',
+               'json-loader-fix.js',
                'scene-manager.js',
                'utils.js',
                'utils-animate.js',],

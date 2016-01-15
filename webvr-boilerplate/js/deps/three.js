@@ -12136,8 +12136,17 @@ THREE.XHRLoader.prototype = {
 
 		if ( cached !== undefined ) {
 
-			if ( onLoad ) onLoad( cached );
-			return;
+			if ( onLoad ) {
+
+				setTimeout( function () {
+
+					onLoad( cached );
+
+				}, 0 );
+
+			}
+
+			return cached;
 
 		}
 
@@ -12146,9 +12155,11 @@ THREE.XHRLoader.prototype = {
 
 		request.addEventListener( 'load', function ( event ) {
 
-			THREE.Cache.add( url, this.response );
+			var response = event.target.response;
 
-			if ( onLoad ) onLoad( this.response );
+			THREE.Cache.add( url, response );
+
+			if ( onLoad ) onLoad( response );
 
 			scope.manager.itemEnd( url );
 
@@ -12164,22 +12175,23 @@ THREE.XHRLoader.prototype = {
 
 		}
 
-		if ( onError !== undefined ) {
+		request.addEventListener( 'error', function ( event ) {
 
-			request.addEventListener( 'error', function ( event ) {
+			if ( onError ) onError( event );
 
-				onError( event );
+			scope.manager.itemError( url );
 
-			}, false );
-
-		}
+		}, false );
 
 		if ( this.crossOrigin !== undefined ) request.crossOrigin = this.crossOrigin;
 		if ( this.responseType !== undefined ) request.responseType = this.responseType;
+		if ( this.withCredentials !== undefined ) request.withCredentials = this.withCredentials;
 
 		request.send( null );
 
 		scope.manager.itemStart( url );
+
+		return request;
 
 	},
 
@@ -12192,6 +12204,12 @@ THREE.XHRLoader.prototype = {
 	setCrossOrigin: function ( value ) {
 
 		this.crossOrigin = value;
+
+	},
+
+	setWithCredentials: function ( value ) {
+
+		this.withCredentials = value;
 
 	}
 
