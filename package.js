@@ -1,6 +1,6 @@
 Package.describe({
   name: 'poetic:vrboiler-plate',
-  version: '0.0.9',
+  version: '0.1.0',
   // Brief, one-line summary of the package.
   summary: 'A small wrapper to a web virtual reality boiler plate page',
   // URL to the Git repository containing the source code for this package.
