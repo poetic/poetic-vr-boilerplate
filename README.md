@@ -1,4 +1,3 @@
-namesspace has changed from poeticsystems to poetic
 [Online Demo](http://boilerplatedemo.meteor.com/)
 
 # To install
