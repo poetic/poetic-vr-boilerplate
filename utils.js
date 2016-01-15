@@ -21,7 +21,6 @@ Utils.handleAnimations = function() {
   Utils.animations.forEach(function(animation, i, animations){
     animation.applyAnimation.callback(animation.applyAnimation.opts, animation);
     if(!animation.isAnimating){
-      console.log(typeof(animation.callback));
       if(typeof(animation.callback) === 'function'){
         animation.callback(animation.mesh);
       }
@@ -42,8 +41,6 @@ Utils.animate = function(objsToUpdate) {
   objsToUpdate.forEach( function( obj ) { obj.update(); } );
   requestAnimationFrame( function() { this.animate( objsToUpdate ); }.bind(this) );
 };
-
-
 
 Utils.registerFunction = function(fn, args){
   Utils.callbacks.push({
