@@ -1,4 +1,5 @@
 namesspace has changed from poeticsystems to poetic
+[Online Demo](http://boilerplatedemo.meteor.com/)
 
 # To install
 A wrapper around the repo https://github.com/borismus/webvr-boilerplate for meteor.
