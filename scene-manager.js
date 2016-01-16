@@ -5,6 +5,7 @@ SceneManager.init = function() {
   addRenderer.call(this);
   addScene.call(this);
   addCamera.call(this);
+  addListener.call(this);
   addVREffect.call(this);
   addVRManager.call(this);
   addCollisionTools.call(this);
@@ -51,6 +52,11 @@ function addVRManager() {
 function addVREffect() {
   this.effect = new THREE.VREffect(this.renderer);
   this.effect.setSize(window.innerWidth, window.innerHeight);
+}
+
+function addListener() {
+  this.listener = new THREE.AudioListener();
+  this.camera.add(this.listener);
 }
 
 function addCamera() {
