@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'reallukemartin:vrboiler-plate',
+  name: 'poetic:vrboiler-plate',
   version: '0.1.0',
   // Brief, one-line summary of the package.
   summary: 'A small wrapper to a web virtual reality boiler plate page',
