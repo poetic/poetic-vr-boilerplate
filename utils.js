@@ -39,12 +39,21 @@ Utils.update = function() {
 
 Utils.animate = function(objsToUpdate) {
   objsToUpdate.forEach( function( obj ) { obj.update(); } );
-  requestAnimationFrame( function() { this.animate( objsToUpdate ); }.bind(this) );
+  Utils.frame = requestAnimationFrame( function() { this.animate( objsToUpdate ); }.bind(this) );
 };
 
 Utils.registerFunction = function(fn, args){
+  var uuid = Meteor.uuid();
   Utils.callbacks.push({
     fn: fn,
     args: args,
+    uuid: uuid,
+  });
+  return uuid;
+}
+
+Utils.deleteFunction = function(uuid){
+  Utils.callbacks = Utils.callbacks.filter( function(cb){
+    return uuid !== cb.uuid;
   });
 }

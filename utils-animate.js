@@ -107,6 +107,7 @@ function getObjectByType(type, opts){
     case 'move-x': payload.opts = { stop: opts.stop, prop: 'mesh.position.x' }; return payload;
     case 'move-y': payload.opts = { stop: opts.stop, prop: 'mesh.position.y' }; return payload;
     case 'move-z': payload.opts = { stop: opts.stop, prop: 'mesh.position.z' }; return payload;
+    case 'vector-move': payload.opts = { stop: opts.stop, type: 'vector', prop: 'mesh.position' }; return payload
     case 'gradient-shift': payload.opts = { stop: opts.stop, type: 'vector', prop: 'mesh.material.color' }; return payload;
     case 'specular-shift': payload.opts = { stop: opts.stop, type: 'vector', prop: 'mesh.material.specular' }; return payload;
     default: warn('Internal Code Problem! Default animation.type was NOT set to \'fade-out\'.');
@@ -211,7 +212,6 @@ function applyVector(target, propName, opts, parent) {
 
   /* iterate through all props on the final state object and if the target object has that prop then tween the value towards the final value */
   for(var prop in opts.stop){
-
     if(typeof(target[prop]) !== 'undefined'){
       parent.amount = (Math.abs(target[prop]-opts.stop[prop]))/(parent.duration/SceneManager.delta);
 
@@ -229,7 +229,5 @@ function applyVector(target, propName, opts, parent) {
 }
 
 function defaultTranstionMessage () {
-
   console.warn('A valid transition was not passed.  Applying a default fade-out!');
-
 }

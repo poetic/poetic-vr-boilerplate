@@ -1,7 +1,6 @@
 SceneManager = {};
 
 SceneManager.init = function() {
-
   addRenderer.call(this);
   addScene.call(this);
   addCamera.call(this);
@@ -11,7 +10,6 @@ SceneManager.init = function() {
   addCollisionTools.call(this);
   addLights.call(this);
   setupExtras.call(this);
-
 };
 
 SceneManager.addMultiple = function(arr) {
@@ -33,7 +31,7 @@ function setupExtras() {
 }
 
 function addLights() {
-  this.pointLight = new THREE.PointLight( 0x3f3f3f, 0.8, 100 );
+  this.pointLight = new THREE.PointLight( 0x3f3f3f, 0.8, 400 );
   this.ambientLight = new THREE.AmbientLight( 0x404040 );
   this.scene.add(this.pointLight);
   this.scene.add(this.ambientLight);
@@ -85,4 +83,10 @@ function setLookAt() {
 
 function getLookAtCollisions() {
   return this.raycaster.intersectObjects( this.scene.children );
+}
+
+window.onresize = function() {
+  SceneManager.camera.aspect = window.innerWidth / window.innerHeight;
+  SceneManager.camera.updateProjectionMatrix();
+  SceneManager.renderer.setSize( window.innerWidth, window.innerHeight );
 }
