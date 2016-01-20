@@ -92,6 +92,7 @@ Unfortunately to prevent internal code issues with arbritrary animation types a 
 'move-z' // expects a number as stop point
 'gradient-shift' // expects an r g b vector {r: 1.0, g: 0.5, b: 1.0}
 'specular-shift' // expects an r g b vector {r: 1.0, g: 0.5, b: 1.0}
+'vector-move' // expants an x y z vector {x: 10, y: 1, z: -24}
 ```
 
 New animation supported types are in the works.
