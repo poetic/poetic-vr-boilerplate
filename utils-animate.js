@@ -104,6 +104,7 @@ function getObjectByType(type, opts){
   switch (type) {
     case 'fade-out': payload.opts = { stop: 0, prop: 'mesh.material.opacity' }; return payload;
     case 'fade-in': payload.opts = { stop: 1, prop: 'mesh.material.opacity' }; return payload;
+    case 'fade': payload.opts = {stop: opts.stop, prop: 'mesh.material.opacity'}; return payload;
     case 'move-x': payload.opts = { stop: opts.stop, prop: 'mesh.position.x' }; return payload;
     case 'move-y': payload.opts = { stop: opts.stop, prop: 'mesh.position.y' }; return payload;
     case 'move-z': payload.opts = { stop: opts.stop, prop: 'mesh.position.z' }; return payload;
