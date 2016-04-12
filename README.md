@@ -1,4 +1,5 @@
-[Online Demo](http://boilerplatedemo.meteor.com/)
+#DEPRECATED
+As of Meteor 1.3 this package is considered deprecated in favor of [Aframe](https://aframe.io/)
 
 # To install
 A wrapper around the repo https://github.com/borismus/webvr-boilerplate for meteor.
